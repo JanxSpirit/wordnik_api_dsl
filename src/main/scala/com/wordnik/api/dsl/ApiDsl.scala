@@ -10,13 +10,19 @@ object ApiDsl extends JavaTokenParsers with ApiCalls {
   
   val wordList = regex("([A-Za-z\\-0-9]){0,50}".r)
 
-  val define = "get definition for"  
+  val define = "define"  
 
-  val list = "list"
+  val list = "words in list"
+
+  val limit = regex("[1-9]".r) ^^ (limit => limit.toInt)
+  
+  val getLimit = "get" ~> limit
+
+  val wordListLimit = getLimit <~ list
 
   val defineWord = define ~> word ^^ (w => DefineCommand(Word(w)))
 
-  val listWordList = list ~> wordList ^^ (w => ListedWordsCommand(WordList(w)))
+  val listWordList = wordListLimit ~ wordList ^^ { case limit ~ word => ListedWordsCommand(WordList(word), limit)}
 
   val apiParser = defineWord | listWordList
 

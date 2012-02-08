@@ -29,7 +29,8 @@ trait ApiCalls {
     val req = :/(url) / "v4" / wordListResource / cmd.wl.permalink / "words" <<? Map("includeRelated" -> "false",
       "sortBy" -> "createDate",
       "sortOrder" -> "desc",
-      "api_key" -> "a704962c325153433b90203fb980d048cf51d3272103ad71a") <:< Map(
+      "api_key" -> "a704962c325153433b90203fb980d048cf51d3272103ad71a",
+      "limit" -> cmd.limit.toString) <:< Map(
       "auth_token" -> auth_token)
     val words = parseJson(req).extract[List[WordResource]]
     words.map(_.word)
