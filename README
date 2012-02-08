@@ -1,0 +1,7 @@
+Grammar
+=======
+
+define $WORD
+show comments on/for/etc. $WORD 
+show lists containing/with/etc. $WORD
+show tags on $WORD
