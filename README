@@ -1,7 +1,8 @@
 Grammar
 =======
 
-define $WORD
-show comments on/for/etc. $WORD 
-show lists containing/with/etc. $WORD
-show tags on $WORD
+get 8 definitions for *word*
+get definition for word
+get 3 words in list *some-word-list*
+get words in *some-word-list*
+get my word lists
