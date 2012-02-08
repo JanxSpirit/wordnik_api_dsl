@@ -3,20 +3,20 @@ package com.wordnik.api.dsl
 import scala.util.parsing.combinator._
 import scala.util.parsing.combinator.syntactical._
 
-object ApiDsl extends JavaTokenParsers {
+object ApiDsl extends JavaTokenParsers with ApiCalls {
 
   
   val word = regex("([A-Za-z]){0,20}".r)
   
-  val wordList = regex("([A-Za-z\\-]){0,50}".r)
+  val wordList = regex("([A-Za-z\\-0-9]){0,50}".r)
 
-  val define = "define"  
+  val define = "get definition for"  
 
   val list = "list"
 
   val defineWord = define ~> word ^^ (w => DefineCommand(Word(w)))
 
-  val listWordList = list ~> wordList ^^ (w => ListCommand(WordList(w)))
+  val listWordList = list ~> wordList ^^ (w => ListedWordsCommand(WordList(w)))
 
   val apiParser = defineWord | listWordList
 
@@ -34,8 +34,12 @@ object ApiDsl extends JavaTokenParsers {
   def process(s: String) = {
     parseAll(apiParser, s) match {
       case Success(res,_) => res match {
-	case DefineCommand(Word(w)) => println("you want to define %s".format(w))
-	case ListCommand(WordList(p)) => println("you want to list wordList %s".format(p))
+	case cmd: DefineCommand => {
+	  getWordDefinition(cmd).foreach(println)
+	}
+	case cmd: ListedWordsCommand => {
+	  getListedWords(cmd).foreach(println)
+	}
       }
       case Failure(msg,_) => println("huh?")
       case Error(msg, _) => println("huh?")

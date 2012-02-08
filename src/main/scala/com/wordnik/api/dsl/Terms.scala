@@ -1,9 +1,9 @@
 package com.wordnik.api.dsl
 
-case class DefineCommand(w: Word)
+case class DefineCommand(word: Word, limit: Int=1)
 
-case class ListCommand(wl: WordList)
+case class ListedWordsCommand(wl: WordList)
 
-case class Word(w: String)
+case class Word(word: String)
 
 case class WordList(permalink: String)
