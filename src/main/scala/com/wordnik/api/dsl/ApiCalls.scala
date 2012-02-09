@@ -11,7 +11,7 @@ trait ApiCalls {
   val wordResource = "word.json"
   val wordListResource = "wordList.json"
   val accountResource = "account.json"
-  val http = new Http
+  val http = new Http with thread.Safety with NoLogging
   val auth_token = getAuthToken
 
   def getWordDefinition(cmd: DefineCommand) = {

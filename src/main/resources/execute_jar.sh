@@ -1,7 +1,12 @@
 #!/bin/sh
 
 echo
-echo "usage: \$0 port_number[8080]"
+echo "Welcome to the Wordnik API tiny DSL"
+echo "ENTER on a blank line to exit"
 echo
 
 exec java -jar \$0 "\$@"
+
+
+
+

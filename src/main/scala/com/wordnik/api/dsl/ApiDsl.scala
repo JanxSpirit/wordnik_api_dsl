@@ -45,6 +45,15 @@ object ApiDsl extends JavaTokenParsers with ApiCalls {
 		  listWordListSingle
 
   def main(args: Array[String]) {
+    println
+    println
+    printHeart
+    println
+    println
+    println("Welcome to the tiny Wordnik API DSL")
+    println("ENTER on empty line to exit")
+    println
+    println
     Iterator.continually(Console.readLine).takeWhile(_ != "")
       .foreach(line => {
 	println
@@ -70,6 +79,42 @@ object ApiDsl extends JavaTokenParsers with ApiCalls {
       case Error(msg, _) => println("huh?")
     }
   }
+
+def printHeart = {
+println("												      ....")
+println("											       . ..................")
+println("							     ......... .		   ....................	. ..")
+println("							 .................  .		   ......   .		   ..")
+println("							.....	       ......  .       . .. .			    ..")
+println("							...		   .......     ....			     .")
+println("						       ...		       .....  ...			     .")
+println("						      ...			 ......				     .")
+println("						     ...			   ...				    ..")
+println("						     ..								    .")
+println("						    ...								    .")
+println("						    ..								   ..")
+println("						   ...								   .")
+println("						   ...								  ..")
+println("						    ...								 ..")
+println("						      ..							..")
+println("						      ...						       ..")
+println("						       ....						      ..")
+println("							.....						    ...")
+println("							    ....					   ..")
+println("							       ........					....")
+println("								   .........			    .......")
+println("								       ...........	      ........")
+println("								       ...... .	.....	  .... .....")
+println("									    ..... ....	 ..... ...")
+println("									      .	.......	...  ..")
+println("										  . . .... ...")
+println("										  ..........")
+println("										   .......")
+println("										    .....")
+println("										    ....")
+println("										      ..")
+println("										      .")
+}
 }
 
 
