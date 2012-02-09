@@ -20,7 +20,7 @@ trait ApiCalls {
       "limit" -> cmd.limit.toString,
       "partOfSpeech" -> "noun",
       "useCanonical" -> "false",
-      "api_key" -> "a704962c325153433b90203fb980d048cf51d3272103ad71a")
+      "api_key" -> "")
     val definitions = parseJson(req).extract[List[WordResource]]
     definitions.map(_.text.getOrElse(""))
   }
@@ -29,7 +29,7 @@ trait ApiCalls {
     val req = :/(url) / "v4" / wordListResource / cmd.wl.permalink / "words" <<? Map("includeRelated" -> "false",
       "sortBy" -> "createDate",
       "sortOrder" -> "desc",
-      "api_key" -> "a704962c325153433b90203fb980d048cf51d3272103ad71a",
+      "api_key" -> "",
       "limit" -> cmd.limit.toString) <:< Map(
       "auth_token" -> auth_token)
     val words = parseJson(req).extract[List[WordResource]]
@@ -39,7 +39,7 @@ trait ApiCalls {
   def parseJson(req: Request) = http(req >- { resp => parse(resp) })
 
   def getAuthToken = {
-    val req = :/(url) / "v4" / accountResource / "authenticate" / "Janx" <<? Map("password" -> "wordnikpass", "api_key" -> "a704962c325153433b90203fb980d048cf51d3272103ad71a")
+    val req = :/(url) / "v4" / accountResource / "authenticate" / "user" <<? Map("password" -> "pass", "api_key" -> "")
     val token = parseJson(req).extract[AuthTokenResource]
     token.token
   }
